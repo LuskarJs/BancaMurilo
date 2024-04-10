@@ -1,0 +1,147 @@
+.venda-page {
+    position: relative;
+    text-align: left;
+}
+
+.venda-page .title-venda {
+    margin-top: 1rem;
+    color: var(--button-color);
+    text-transform: uppercase;
+    background-color: white;
+    display: inline-block;
+    padding: .4rem;
+    border-radius: 5px;
+}
+
+.venda-page .title-venda h4 {
+    font-size: 1.2rem;
+}
+
+.venda-page .actions-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0px;
+    gap: .7rem 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    padding: 1rem;
+    background-image: linear-gradient( transparent 5%,#7C88A0 40%);
+}
+
+.venda-page .actions-buttons button {
+    display: flex;
+    text-transform: uppercase;
+    align-items: center;
+    padding: 10px 1rem;
+    transition: all .35s ease;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.venda-page .actions-buttons button:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.726);
+    transition: all .35s ease;
+}
+
+.venda-page .actions-buttons button:first-child {
+    padding: 0 1rem;
+    color: white;
+    background-color: #7C88A0;
+    border: 2px solid var(--bg-color);
+}
+
+.venda-page .actions-buttons button:last-child {
+    background-color: #6CEC61;
+    color: white;
+    width: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.venda-page .lista-categoiras {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    list-style: none;
+    gap: 10px;
+    overflow-x: scroll;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(105, 102, 102, 0.63);
+    border-top: 1px solid rgba(105, 102, 102, 0.63);
+}
+
+.venda-page .lista-categoiras li {
+    text-transform: uppercase;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.venda-page .lista-categoiras li:hover {
+    background-color: var(--button-color);
+    color:white;
+}
+
+.lista-produtos-venda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.lista-produtos-venda .card-estoque {
+    width: 200px;
+}
+
+.tabela-venda {
+    background-color: white;
+    max-height: 200px!important;
+}
+
+.tabela-venda thead tr th {
+    border-radius: none;
+}
+
+.tabela-venda tbody {
+    overflow-y: auto;
+}
+
+.tabela-venda tbody tr {
+    height: 60px!important;
+}
+
+.tabela-venda tbody td {
+    font-size: .8rem;
+}
+
+.tabela-venda tbody td:nth-child(4) {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.tabela-venda tbody td:nth-child(4) button {
+    border-radius: 50%;
+    padding: 5px 10px;
+}
+
+.tabela-venda tbody td figure {
+    width: 15px;
+    height: 15px;
+}
+
+.tabela-venda tbody td figure img {
+    width: 100%;
+    height: 100%;
+}
+
+.tabela-venda tbody td:last-child button {
+    background-color: crimson;
+    border-radius: 10px;
+    cursor: pointer;
+}

@@ -1,0 +1,115 @@
+.cardSection {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.247);
+}
+
+.cardSection.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.cardSection .cardShow{
+    position: fixed;
+    border: 3px solid var(--button-color);
+    background: white;
+    border-radius: 5px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+    padding: .5rem;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.74);
+    padding-top: 0;
+}
+
+.cardSection .cardShow .top-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cardSection .cardShow .top-action figure:last-child {
+    cursor: pointer;
+}
+
+.cardSection .cardShow .infoCard .imgCard figure {
+    width: 150px;
+    height: 150px;
+}
+
+.cardSection .cardShow .infoCard .imgCard figure img {
+    width: 100%;
+}
+
+.cardSection .cardShow .infoCard .titleCard {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    background-color: var(--button-color);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.cardSection .cardShow .infoCard > ul {
+    list-style: none;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.cardSection .cardShow .infoCard > ul li:first-child{
+    color: rgb(83, 80, 80);
+    text-transform: uppercase;
+}
+
+.cardSection .cardShow .infoCard .button-actions {
+    margin: 1rem 0 ;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cardSection .cardShow .infoCard .button-actions button {
+    border-radius: 5px;
+    transition: all .35s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0 .7rem;
+    text-transform: uppercase;
+}
+
+.cardSection .cardShow .infoCard .button-actions button:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.74);
+    transition: all .35s ease;
+}
+
+.cardSection .cardShow .infoCard .button-actions button:first-child {
+    background-color: var(--button-color);
+    color: white;
+}
+
+.cardSection .cardShow .infoCard .button-actions button:last-child {
+    background-color: crimson;
+}
+
+.cardSection .cardShow .infoCard > p {
+    color: grey;
+    margin-top: 10px;
+}
+
+.cardSection .cardShow .infoCard > p:hover {
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+}
