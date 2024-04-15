@@ -51,15 +51,18 @@ header nav ul.show {
     z-index: 1;
     top: 60px;
     left: 0;
+    gap: 1rem;
     text-align: left;
     padding-top: 10px;
     padding-left: 15px;
     list-style: none;
     position: fixed;
+    transition: all .35s ease;
     background-color: var(--bg-color);
 }
 
 header nav ul.show li {
+    transition: all .35s ease;
     font-size: 2rem;
     text-transform: uppercase;
 }

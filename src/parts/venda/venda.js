@@ -1,3 +1,4 @@
+import React, {useState} from "react";
 import "./venda.css";
 import carrinho from "../img/carrinho.png"
 import SearchIcon from "../img/big-search-len.png";
@@ -6,6 +7,12 @@ import produto from "../img/caixaseda.png";
 import TabelaCarrinho from "./tabelaVenda";
 
 function PageVenda() {
+    const [totalItens, setTotalItens] = useState(0);
+    const [produtos, setProdutos] = useState([]);
+
+    const atualizarTotalItens = (quantidade) => {
+        setTotalItens(quantidade);
+    };
 
     return (
         <section className="venda-page">
@@ -30,7 +37,7 @@ function PageVenda() {
                 <li>Bebidas</li>
                 <li>cigarro</li>
             </ul>
-            < TabelaCarrinho />
+            <TabelaCarrinho produtos={produtos} setProdutos={setProdutos} />
             <ul className="lista-produtos-venda">
                     <li className="card-estoque">
                         <figure>
@@ -110,7 +117,7 @@ function PageVenda() {
                     <figure>
                         <img src={ carrinho} alt="icone carrinho de compras" />
                     </figure>
-                    <p>Total de Itens: <span> 8 </span></p>
+                    <p>Total de Itens: <span>{totalItens}</span></p>
                 </button>
                 <button> Finalizar Venda</button>
             </div>

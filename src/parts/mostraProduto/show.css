@@ -21,6 +21,7 @@
     background: white;
     border-radius: 5px;
     width: 80%;
+    overflow: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,6 +40,23 @@
 
 .cardSection .cardShow .top-action figure:last-child {
     cursor: pointer;
+}
+
+.cardSection .cardShow .infoCard {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardSection .cardShow .infoCard .titleCard input,
+.cardSection .cardShow .infoCard ul li input {
+    padding: .2rem;
+    margin-top: 5px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid var(--button-color);
 }
 
 .cardSection .cardShow .infoCard .imgCard figure {
@@ -73,10 +91,12 @@
 }
 
 .cardSection .cardShow .infoCard .button-actions {
-    margin: 1rem 0 ;
+    margin: 1rem;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
 }
 
 .cardSection .cardShow .infoCard .button-actions button {

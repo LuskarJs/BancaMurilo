@@ -4,13 +4,15 @@ import HeaderPage from "../header/header";
 import SearchIcon from "../img/big-search-len.png";
 import filtroIcon from "../img/filtro.png";
 import InterrogacaoIcon from "../img/sinal-de-interrogacao.png";
-import produto from "../img/caixaseda.png";
 import ShowProduto from "../mostraProduto/showProduto";
 import PageVenda from "../venda/venda";
 import { produtos } from "../data/data";
 
 function HomePage() {
     const [produtoSelecionado, setProdutoSelecionado] = useState(null); 
+    const [termoPesquisa, setTermoPesquisa] = useState("");
+    const [exibirPageVenda, setExibirPageVenda] = useState(false);
+    const [produtosVenda, setProdutosVenda] = useState([]);
 
     const handleVerMais = (produto) => {
         setProdutoSelecionado(produto);
@@ -20,23 +22,71 @@ function HomePage() {
         setProdutoSelecionado(null);
     };
 
+    const handleDeleteProduto = (codigo) => {
+        const novosProdutos = produtos.filter((produto) => produto.codigo !== codigo);
+        // Atualize a array de produtos para refletir a exclusão do produto
+        // Aqui você pode usar o useState ou qualquer outra lógica de gerenciamento de estado da sua aplicação
+        console.log("Produto com código", codigo, "excluído.");
+    };
 
+    const handleEditProduto = (produtoEditado) => {
+        const novosProdutos = produtos.map((produto) => {
+            if (produto.codigo === produtoEditado.codigo) {
+                return produtoEditado;
+            }
+            return produto;
+        });
+        // Atualize a array de produtos para refletir as alterações no produto editado
+        // Aqui você pode usar o useState ou qualquer outra lógica de gerenciamento de estado da sua aplicação
+        console.log("Produto editado:", produtoEditado);
+    };
+
+    const handlePesquisa = (event) => {
+        setTermoPesquisa(event.target.value);
+    };
+
+    const produtosFiltrados = produtos.filter(
+        (produto) =>
+            produto?.nome.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
+            produto?.codigo.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
+            produto?.categoria.toLowerCase().includes(termoPesquisa.toLowerCase())
+    );
+
+    const handleExibirPageVenda = () => {
+        const produtosComHorario = produtosFiltrados.map(produto => ({
+            ...produto,
+            horario: new Date().toLocaleTimeString()
+        }));
+        setProdutosVenda([...produtosVenda, ...produtosComHorario]);
+        setExibirPageVenda(true);
+    };
+    
     return (
 
         <section className="home" >
             <HeaderPage />
-            <div className="Profile-caixa">
+
+            {exibirPageVenda ? (
+                <PageVenda  produtos={produtosVenda}
+                            setProdutos={setProdutosVenda} 
+                            produtoSelecionado={produtoSelecionado} 
+                            onClose={() => setExibirPageVenda(false)}
+                             />
+            ) : (
+                <>
+                 <div className="Profile-caixa">
                 <div>
                     <h2>Caixa: <span>Murilo Luis</span></h2>
-                    <h3>Entrada: <span>8:55</span></h3>
+                    <h2>Caixa inicial R$: <span>180</span></h2>
                 </div>
                 <div>
-                    <h2>Caixa inicial R$: <span>180</span></h2>
+                    <h3>Entrada: <span>8:55</span></h3>
                     <h3>Vendas total <span>3</span></h3>
                 </div>
             </div>
+
             <div className="Search-input">
-                <input type="text" placeholder="procure por qualquer produto aqui" />
+                <input type="text" placeholder="procure por qualquer produto aqui" onChange={handlePesquisa} />
                 <button>
                     <figure>
                         <img src={SearchIcon} alt="icone de procura" />
@@ -48,6 +98,7 @@ function HomePage() {
                     </figure>
                 </button>
             </div>
+
             <section className="EstoqueSection">
                 <div className="title-estoque">
                     <h3>Estoque de Produtos</h3>
@@ -56,22 +107,25 @@ function HomePage() {
                     </figure>
                 </div>
                 <ul>
-                    {produtos.map(produto => (
+                    {produtosFiltrados.map((produto) => (
                         <li className="card-estoque" key={produto.codigo}>
                             <figure>
-                                <img src={produto} alt={`Imagem de ${produto.nome}`} />
+                                <img src={produto?.img} alt={`Imagem de ${produto.nome}`} />
                             </figure>
                             <div>
                                 <h3>{produto.nome}</h3>
                                 <h4>Tipo: <span>{produto.categoria}</span></h4>
                                 <h5>Em Estoque: <span>{produto.quantidade}</span></h5>
                             </div>
-                            <button onClick={() => handleVerMais(produto)}>Ver Mais</button> 
+                            <button onClick={() => handleVerMais(produto)}>Ver Mais</button>
+                            <button onClick={handleExibirPageVenda}>Vender</button>
                         </li>
                     ))}
                 </ul>
             </section>
-            <ShowProduto produto={produtoSelecionado} onClose={handleCloseProduto} />
+            
+            <ShowProduto produto={produtoSelecionado} onClose={handleCloseProduto} onDelete={handleDeleteProduto} onEdit={handleEditProduto} /> 
+            
             <section className="HistoricoSection">
                 <div className='title-vendas'>
                     <h2>Historico de Vendas</h2>
@@ -132,6 +186,7 @@ function HomePage() {
                     </tbody>
                 </table>
             </section>
+
             <div class="resumo-desempenho-vendas">
                 <h3>Resumo de Desempenho de Vendas</h3>
                 <div class="dados-vendas">
@@ -165,9 +220,13 @@ function HomePage() {
                         </div>
                     </div>
                 </div>
+                </>
+           )}
+
         </section>
         
-    )
+        
+    );
 }
 
 export default HomePage; 

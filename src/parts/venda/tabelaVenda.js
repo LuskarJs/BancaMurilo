@@ -1,20 +1,25 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import carrinho from "../img/carrinho.png"
 
 
-function TabelaCarrinho() {
-    const [produtos, setProdutos] = useState([
-        { id: 1, nome: 'Produto A', categoria: 'Categoria 1', horario: '09:00', quantidade: 1 },
-        { id: 2, nome: 'Produto B', categoria: 'Categoria 2', horario: '10:30', quantidade: 2 },
-        { id: 3, nome: 'Produto C', categoria: 'Categoria 1', horario: '12:15', quantidade: 3 },
-      
-    ]);
+function TabelaCarrinho({ produtos, setProdutos }) {
 
-    const [totalItens, setTotalItens] = useState(produtos.reduce((total, produto) => total + produto.quantidade, 0));
-    const [totalValor, setTotalValor] = useState(produtos.reduce((total, produto) => total + (produto.quantidade * produto.preco), 0));
-    const [metodoPagamento, setMetodoPagamento] = useState('');
-    const [valorRecebido, setValorRecebido] = useState('');
-    const [troco, setTroco] = useState('');
+    const [totalItens, setTotalItens] = useState(0);
+    const [totalValor, setTotalValor] = useState(0);
+
+    useEffect(() => {
+        if (Array.isArray(produtos)) {
+            const newTotalItens = produtos.reduce((total, produto) => total + produto.quantidade, 0);
+            const newTotalValor = produtos.reduce((total, produto) => total + produto.quantidade * produto.preco, 0);
+            setTotalItens(newTotalItens);
+            setTotalValor(newTotalValor);
+        }
+    }, [produtos]);
+
+    
+    const [metodoPagamento, setMetodoPagamento] = useState("");
+    const [valorRecebido, setValorRecebido] = useState("");
+    const [troco, setTroco] = useState("");
 
     const handleRemoverProduto = (id) => {
         const confirmacao = window.confirm('Tem certeza que deseja remover esse item?');
@@ -73,27 +78,29 @@ function TabelaCarrinho() {
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
-                {produtos.map(produto => (
-                    <tr key={produto.id}>
-                        <td>{produto.nome}</td>
-                        <td>{produto.categoria}</td>
-                        <td>{produto.horario}</td>
-                        <td>
-                            <button onClick={() => handleQuantidadeChange(produto.id, produto.quantidade - 1)}>-</button>
-                            {produto.quantidade}
-                            <button onClick={() => handleQuantidadeChange(produto.id, produto.quantidade + 1)}>+</button>
-                        </td>
-                        <td>
-                            <button onClick={() => handleRemoverProduto(produto.id)}>
-                                <figure>
-                                    <img src={carrinho} alt="icone de carrinho" />
-                                </figure>
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
+            {produtos.map((produto) => (
+                        <tr key={produto.id}>
+                            <td>{produto.nome}</td>
+                            <td>{produto.categoria}</td>
+                            <td>{produto.horario}</td>
+                            <td>
+                                <button onClick={() => handleQuantidadeChange(produto.id, produto.quantidade - 1)}>
+                                    -
+                                </button>
+                                {produto.quantidade}
+                                <button onClick={() => handleQuantidadeChange(produto.id, produto.quantidade + 1)}>
+                                    +
+                                </button>
+                            </td>
+                            <td>
+                                <button onClick={() => handleRemoverProduto(produto.id)}>
+                                    <figure>
+                                        <img src={carrinho} alt="icone de carrinho" />
+                                    </figure>
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
         </table>
          <div className="metodo-pagamento">
          <p>Método de Pagamento:</p>
