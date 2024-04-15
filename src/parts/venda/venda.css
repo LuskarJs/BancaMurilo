@@ -145,3 +145,32 @@
     border-radius: 10px;
     cursor: pointer;
 }
+
+.metodo-pagamento {
+    margin: 1rem 0;
+}
+
+.metodo-pagamento p {
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.metodo-pagamento label {
+    margin: 10px;
+    align-items: center;
+}
+
+.metodo-pagamento .troco {
+    margin-top: 10px;
+}
+
+.metodo-pagamento .troco input{
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.metodo-pagamento label input {
+    margin-left: 5px;
+}

@@ -6,46 +6,55 @@ import editar from "../img/troca.png";
 import apagar from "../img/botao-apagar.png";
 import React, { useState } from "react";
 
+function ShowProduto({ produto, onClose }) {
+    const [isOpen, setIsOpen] = useState(false);
 
-function ShowProduto() {
+    const close = () => {
+        setIsOpen(false);
+        onClose();
+    };
 
-    const [isOpen,setisOpen] = useState(false);
-
-    const OpenEClose = () => {
-        setisOpen(true)
-    }
+    React.useEffect(() => {
+        if (produto) {
+            setIsOpen(true);
+        }
+    }, [produto]);
 
     return (
-        <section className={`cardSection ${isOpen ? "show" : "hidden" }`} >
+        <section className={`cardSection ${isOpen ? "show" : "hidden"}`}>
             <div className="cardShow">
                 <div className="top-action">
                     <figure>
                         <img src={InterrogacaoIcon} alt="para tirar duvida sobre a seção" />
                     </figure>
-                    <figure 
-                        onClick={OpenEClose}
-                    >
+                    <figure onClick={close}>
                         <img src={xIcon} alt="x para fechar a janela" />
                     </figure>
                 </div>
                 <div className="infoCard">
-                    <div className='imgCard'>
+                    <div className="imgCard">
                         <figure>
                             <img src={seda} alt="imagem do produto" />
                         </figure>
                     </div>
-                    <div className='titleCard'>
-                        <h3>Seda Zomo Marrom</h3>
+                    <div className="titleCard">
+                        <h3>{produto?.nome}</h3>
                     </div>
                     <ul>
-                        <li>Codigo: <span>457</span></li>
-                        <li>Preço: R$<span>4</span></li>
-                        <li>Unidade: <span>45</span></li>
+                        <li>
+                            Código: <span>{produto ? produto.codigo : ""}</span>
+                        </li>
+                        <li>
+                            Preço: R$<span>{produto ? produto.precoVenda : ""}</span>
+                        </li>
+                        <li>
+                            Unidade: <span>{produto ? produto.quantidade : ""}</span>
+                        </li>
                         <li>Vendidas essa semana: <span>75</span></li>
                         <li>Vendidas Hoje: <span>4</span></li>
-                        <li>Vendidas nesses Mês: <span>5</span></li>
+                        <li>Vendidas nesse Mês: <span>5</span></li>
                     </ul>
-                    <div className='button-actions'>
+                    <div className="button-actions">
                         <button>
                             <figure>
                                 <img src={editar} alt="" />
@@ -62,7 +71,8 @@ function ShowProduto() {
                 </div>
             </div>
         </section>
-    )
- }
+    );
+}
+
 
  export default ShowProduto;

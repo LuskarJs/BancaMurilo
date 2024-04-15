@@ -10,20 +10,59 @@ function TabelaCarrinho() {
       
     ]);
 
+    const [totalItens, setTotalItens] = useState(produtos.reduce((total, produto) => total + produto.quantidade, 0));
+    const [totalValor, setTotalValor] = useState(produtos.reduce((total, produto) => total + (produto.quantidade * produto.preco), 0));
+    const [metodoPagamento, setMetodoPagamento] = useState('');
+    const [valorRecebido, setValorRecebido] = useState('');
+    const [troco, setTroco] = useState('');
+
     const handleRemoverProduto = (id) => {
-        setProdutos(produtos.filter(produto => produto.id !== id));
+        const confirmacao = window.confirm('Tem certeza que deseja remover esse item?');
+        if (confirmacao) {
+            setProdutos(produtos.filter(produto => produto.id !== id));
+            setTotalItens(totalItens - 1);
+        }
     };
 
     const handleQuantidadeChange = (id, newQuantidade) => {
-        setProdutos(produtos.map(produto => {
-            if (produto.id === id) {
-                return { ...produto, quantidade: newQuantidade };
+        if (newQuantidade === 0) {
+            const confirmacao = window.confirm('Deseja remover todas as unidades desse item?');
+            if (confirmacao) {
+                setProdutos(produtos.filter(produto => produto.id !== id));
+                setTotalItens(totalItens - 1);
             }
-            return produto;
-        }));
+        } else {
+            setProdutos(produtos.map(produto => {
+                if (produto.id === id) {
+                    return { ...produto, quantidade: newQuantidade };
+                }
+                return produto;
+            }));
+        }
     };
 
+    const handleMetodoPagamentoChange = (metodo) => {
+        setMetodoPagamento(metodo);
+        if (metodo === 'dinheiro') {
+            setValorRecebido('');
+            setTroco('');
+        }
+    };
+
+    const handleValorRecebidoChange = (valor) => {
+        const valorNumerico = parseFloat(valor);
+        setValorRecebido(valorNumerico.toFixed(2));
+        if (valorNumerico >= totalValor) {
+            const trocoCalculado = (valorNumerico - totalValor).toFixed(2);
+            setTroco(trocoCalculado);
+        } else {
+            setTroco('');
+        }
+    };
+
+
     return (
+        <section>
         <table className="tabela-venda">
             <thead>
                 <tr>
@@ -56,6 +95,34 @@ function TabelaCarrinho() {
                 ))}
             </tbody>
         </table>
+         <div className="metodo-pagamento">
+         <p>Método de Pagamento:</p>
+         <label>
+             Crédito
+             <input type="radio" name="metodoPagamento" value="credito" onChange={() => handleMetodoPagamentoChange('credito')} />
+         </label>
+         <label>
+             Débito
+             <input type="radio" name="metodoPagamento" value="debito" onChange={() => handleMetodoPagamentoChange('debito')} />
+         </label>
+         <label>
+             Pix
+             <input type="radio" name="metodoPagamento" value="pix" onChange={() => handleMetodoPagamentoChange('pix')} />
+         </label>
+         <label>
+             Dinheiro
+             <input type="radio" name="metodoPagamento" value="dinheiro" onChange={() => handleMetodoPagamentoChange('dinheiro')} />
+         </label>
+         {metodoPagamento === 'dinheiro' && (
+             <div className="troco">
+                 <label>Valor Recebido:
+                     <input type="text" value={valorRecebido} onChange={(e) => handleValorRecebidoChange(e.target.value)} />
+                 </label>
+                 {troco && <p>Troco: R$ {troco}</p>}
+             </div>
+         )}
+     </div>
+     </section>
     );
 }
 

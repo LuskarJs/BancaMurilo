@@ -1,4 +1,5 @@
-import "./home.css"
+import "./home.css";
+import React, { useState } from "react";
 import HeaderPage from "../header/header";
 import SearchIcon from "../img/big-search-len.png";
 import filtroIcon from "../img/filtro.png";
@@ -6,14 +7,24 @@ import InterrogacaoIcon from "../img/sinal-de-interrogacao.png";
 import produto from "../img/caixaseda.png";
 import ShowProduto from "../mostraProduto/showProduto";
 import PageVenda from "../venda/venda";
+import { produtos } from "../data/data";
 
 function HomePage() {
+    const [produtoSelecionado, setProdutoSelecionado] = useState(null); 
+
+    const handleVerMais = (produto) => {
+        setProdutoSelecionado(produto);
+    };
+
+    const handleCloseProduto = () => {
+        setProdutoSelecionado(null);
+    };
+
 
     return (
 
         <section className="home" >
             <HeaderPage />
-            < PageVenda />
             <div className="Profile-caixa">
                 <div>
                     <h2>Caixa: <span>Murilo Luis</span></h2>
@@ -45,30 +56,22 @@ function HomePage() {
                     </figure>
                 </div>
                 <ul>
-                    <li className="card-estoque">
-                        <figure>
-                            <img src={produto} alt="" />
-                        </figure>
-                        <div>
-                            <h3>Seda Zomo Marrom</h3>
-                            <h4>Tipo: <span>caixa</span></h4>
-                            <h5>Em Estoque: <span>42</span></h5>
-                        </div>
-                        <button>Ver Mais</button>
-                    </li>
-                    <li className="card-estoque">
-                        <figure>
-                            <img src={produto} alt="" />
-                        </figure>
-                        <div>
-                            <h3>Seda Zomo Marrom</h3>
-                            <h4>Tipo: <span>caixa</span></h4>
-                            <h5>Em Estoque: <span>42</span></h5>
-                        </div>
-                        <button>Ver Mais</button>
-                    </li>
+                    {produtos.map(produto => (
+                        <li className="card-estoque" key={produto.codigo}>
+                            <figure>
+                                <img src={produto} alt={`Imagem de ${produto.nome}`} />
+                            </figure>
+                            <div>
+                                <h3>{produto.nome}</h3>
+                                <h4>Tipo: <span>{produto.categoria}</span></h4>
+                                <h5>Em Estoque: <span>{produto.quantidade}</span></h5>
+                            </div>
+                            <button onClick={() => handleVerMais(produto)}>Ver Mais</button> 
+                        </li>
+                    ))}
                 </ul>
             </section>
+            <ShowProduto produto={produtoSelecionado} onClose={handleCloseProduto} />
             <section className="HistoricoSection">
                 <div className='title-vendas'>
                     <h2>Historico de Vendas</h2>
@@ -129,7 +132,6 @@ function HomePage() {
                     </tbody>
                 </table>
             </section>
-
             <div class="resumo-desempenho-vendas">
                 <h3>Resumo de Desempenho de Vendas</h3>
                 <div class="dados-vendas">
@@ -164,6 +166,7 @@ function HomePage() {
                     </div>
                 </div>
         </section>
+        
     )
 }
 

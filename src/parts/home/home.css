@@ -89,6 +89,7 @@
     gap: 0 1rem;
     list-style: none;
     align-items: center;
+    overflow-x: scroll;
     justify-content: flex-start;
 }
 
