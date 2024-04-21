@@ -67,6 +67,11 @@ header nav ul.show li {
     text-transform: uppercase;
 }
 
+header nav ul.show li a {
+    text-decoration: none;
+    color: var(--button-color);
+}
+
 header nav ul.show li:last-child {
     color: crimson;
 }
@@ -84,6 +89,11 @@ header nav ul.show li:hover {
     border-radius: 5px 0 0 5px  ;
     transition: all .35s ease;
 }
+
+header nav ul.show li:hover a{
+    color: white;
+}
+
 
 figure {
     width: 25px;

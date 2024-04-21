@@ -7,6 +7,8 @@ import InterrogacaoIcon from "../img/sinal-de-interrogacao.png";
 import ShowProduto from "../mostraProduto/showProduto";
 import PageVenda from "../venda/venda";
 import { produtos } from "../data/data";
+import caixa from "../img/caixa-registradora.png"
+import { Link } from "react-router-dom";
 
 function HomePage() {
     const [produtoSelecionado, setProdutoSelecionado] = useState(null); 
@@ -24,8 +26,6 @@ function HomePage() {
 
     const handleDeleteProduto = (codigo) => {
         const novosProdutos = produtos.filter((produto) => produto.codigo !== codigo);
-        // Atualize a array de produtos para refletir a exclusão do produto
-        // Aqui você pode usar o useState ou qualquer outra lógica de gerenciamento de estado da sua aplicação
         console.log("Produto com código", codigo, "excluído.");
     };
 
@@ -36,8 +36,6 @@ function HomePage() {
             }
             return produto;
         });
-        // Atualize a array de produtos para refletir as alterações no produto editado
-        // Aqui você pode usar o useState ou qualquer outra lógica de gerenciamento de estado da sua aplicação
         console.log("Produto editado:", produtoEditado);
     };
 
@@ -51,30 +49,19 @@ function HomePage() {
             produto?.codigo.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
             produto?.categoria.toLowerCase().includes(termoPesquisa.toLowerCase())
     );
-
-    const handleExibirPageVenda = () => {
-        const produtosComHorario = produtosFiltrados.map(produto => ({
-            ...produto,
-            horario: new Date().toLocaleTimeString()
-        }));
-        setProdutosVenda([...produtosVenda, ...produtosComHorario]);
-        setExibirPageVenda(true);
-    };
     
     return (
 
         <section className="home" >
+                <Link to="/AreaVenda">
+            <button className="registradora">
+                    <figure>
+                      <img src={caixa} alt="caixa registradora" />
+                    </figure>
+            </button>
+                </Link>
             <HeaderPage />
-
-            {exibirPageVenda ? (
-                <PageVenda  produtos={produtosVenda}
-                            setProdutos={setProdutosVenda} 
-                            produtoSelecionado={produtoSelecionado} 
-                            onClose={() => setExibirPageVenda(false)}
-                             />
-            ) : (
-                <>
-                 <div className="Profile-caixa">
+            <div className="Profile-caixa">
                 <div>
                     <h2>Caixa: <span>Murilo Luis</span></h2>
                     <h2>Caixa inicial R$: <span>180</span></h2>
@@ -118,7 +105,6 @@ function HomePage() {
                                 <h5>Em Estoque: <span>{produto.quantidade}</span></h5>
                             </div>
                             <button onClick={() => handleVerMais(produto)}>Ver Mais</button>
-                            <button onClick={handleExibirPageVenda}>Vender</button>
                         </li>
                     ))}
                 </ul>
@@ -220,9 +206,6 @@ function HomePage() {
                         </div>
                     </div>
                 </div>
-                </>
-           )}
-
         </section>
         
         

@@ -5,6 +5,15 @@
     position: relative;
 }
 
+.registradora {
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+    z-index: 9999;
+    border-radius: 50%;
+    background-color: var(--button-login);
+}
+
 .home .Profile-caixa {
     display: flex;
     margin: 1rem 0;
@@ -33,35 +42,35 @@
     text-transform: lowercase;
 }
 
-.home .Search-input {
-    width: 100%;
+.Search-input {
+    width: 90%;
     display: flex;
     align-items: center;
-    margin: 1rem 0;
+    margin: 1rem .7rem;
 }
 
-.home .Search-input button {
+.Search-input button {
     margin: 0 10px;
     border-radius: 5px;
     background-color: var(--button-color);
     cursor: pointer;
 }
 
-.home .Search-input button:last-child {
+.Search-input button:last-child {
     margin: 0;
 }
 
-.home .Search-input button figure {
+.Search-input button figure {
     width: 15px;
     height: 15px;
 }
 
-.home .Search-input button figure img {
+.Search-input button figure img {
     width: 100%;
     height: 100%;
 }
 
-.home .Search-input input {
+.Search-input input {
     padding: .9rem;
     width: 100%;
     outline: none;

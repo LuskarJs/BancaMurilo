@@ -1,10 +1,14 @@
 .venda-page {
     position: relative;
     text-align: left;
+    background-color: var(--bg-color);
+    padding: 2rem 0;
+    padding-bottom: 9rem;
 }
 
 .venda-page .title-venda {
     margin-top: 1rem;
+    margin-left: 1rem;
     color: var(--button-color);
     text-transform: uppercase;
     background-color: white;
@@ -63,27 +67,30 @@
     justify-content: center;
 }
 
-.venda-page .lista-categoiras {
+.venda-page .lista-categorias {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     list-style: none;
     gap: 10px;
-    overflow-x: scroll;
+    transition: all .35s ease;
     margin-bottom: 1rem;
-    border-bottom: 1px solid rgba(105, 102, 102, 0.63);
-    border-top: 1px solid rgba(105, 102, 102, 0.63);
+    border-bottom: 1px solid var(--button-color);
+    border-top: 1px solid var(--button-color);
 }
 
-.venda-page .lista-categoiras li {
+.venda-page .lista-categorias li {
     text-transform: uppercase;
     padding: 5px 10px;
     cursor: pointer;
 }
 
-.venda-page .lista-categoiras li:hover {
+.venda-page .lista-categorias li.selected,
+.venda-page .lista-categorias li:hover {
     background-color: var(--button-color);
     color:white;
+    transition: all .35s ease;
 }
 
 .lista-produtos-venda {
@@ -98,17 +105,45 @@
     width: 200px;
 }
 
+.sectionTabela {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.678);
+    padding: 2rem 0;
+}
+
+.sectionTabela > button {
+    width: 90%;
+    transition: all .35s ease;
+    padding: 1rem;
+    color: var(--button-color);
+}
+
+.sectionTabela > button:Hover {
+    background-color: var(--bg-color);
+    cursor: pointer;
+    transition: all .35s ease;
+}
+
 .tabela-venda {
+    overflow-y: scroll;
     background-color: white;
-    max-height: 200px!important;
 }
 
 .tabela-venda thead tr th {
     border-radius: none;
+    font-size: .7rem;
 }
 
 .tabela-venda tbody {
-    overflow-y: auto;
+    overflow: auto;
 }
 
 .tabela-venda tbody tr {
@@ -147,18 +182,29 @@
 }
 
 .metodo-pagamento {
-    margin: 1rem 0;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 1rem;
 }
 
 .metodo-pagamento p {
     margin-bottom: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
+    margin-left: .7rem;
 }
 
 .metodo-pagamento label {
     margin: 10px;
     align-items: center;
+}
+
+.metodo-pagamento .option-pagamento {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .metodo-pagamento .troco {

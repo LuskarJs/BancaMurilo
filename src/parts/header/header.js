@@ -1,4 +1,5 @@
-import "./header.css"
+import "./header.css";
+import { Link } from "react-router-dom";
 import menuIcon from "../img/menu.png";
 import notificationIcon from "../img/notificacao.png";
 import Ract,{useState} from 'react';
@@ -17,8 +18,16 @@ function HeaderPage() {
             <nav>
                 <h1>Banca Do Murilo</h1>
                 <ul className={` ${ShowMenu ? "hidden" : "show"}`}>
-                    <li>inicio</li>
-                    <li>Estoque</li>
+                    <li>
+                        <Link to="/">
+                             inicio
+                        </Link>         
+                    </li>
+                    <li>
+                        <Link to="/Estoque">
+                             Estoque
+                        </Link>  
+                    </li>
                     <li>Relatorio</li>
                     <li>Configuração</li>
                     <li>Historico de Vendas</li>
