@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import Excluir from "../img/botao-apagar.png";
 
 function TabelaCarrinho({ produtos, setProdutos, onClose, onFinalizarVenda }) {
   const [metodoPagamento, setMetodoPagamento] = useState("");
@@ -62,7 +63,6 @@ function TabelaCarrinho({ produtos, setProdutos, onClose, onFinalizarVenda }) {
   };
 
   const handleCancelarVenda = () => {
-    // Limpar produtos selecionados e fechar a modal
     setProdutos([]);
     onClose();
   };
@@ -91,7 +91,11 @@ function TabelaCarrinho({ produtos, setProdutos, onClose, onFinalizarVenda }) {
               </td>
               <td>R$ {produto.precoVenda}</td>
               <td>
-                <button onClick={() => handleRemoverProduto(produto.id)}>Remover</button>
+                <button onClick={() => handleRemoverProduto(produto.id)}>
+                  <figure>
+                    <img src={Excluir} alt="icone de excluir" />
+                  </figure>
+                </button>
               </td>
             </tr>
           ))}
@@ -99,18 +103,21 @@ function TabelaCarrinho({ produtos, setProdutos, onClose, onFinalizarVenda }) {
       </table>
       <div className="metodo-pagamento">
         <p>Método de Pagamento:</p>
-        <label>
-          Crédito
-          <input type="radio" name="metodoPagamento" value="credito" onChange={() => handleMetodoPagamentoChange('credito')} />
-        </label>
-        <label>
-          Débito
-          <input type="radio" name="metodoPagamento" value="debito" onChange={() => handleMetodoPagamentoChange('debito')} />
-        </label>
-        <label>
-          Pix
-          <input type="radio" name="metodoPagamento" value="pix" onChange={() => handleMetodoPagamentoChange('pix')} />
-        </label>
+        <div>
+          <label>
+            Crédito
+            <input type="radio" name="metodoPagamento" value="credito" onChange={() => handleMetodoPagamentoChange('credito')} />
+          </label>
+          <label>
+            Débito
+            <input type="radio" name="metodoPagamento" value="debito" onChange={() => handleMetodoPagamentoChange('debito')} />
+          </label>
+          <label>
+            Pix
+            <input type="radio" name="metodoPagamento" value="pix" onChange={() => handleMetodoPagamentoChange('pix')} />
+          </label>
+        </div>
+        
         <label>
           Dinheiro
           <input type="radio" name="metodoPagamento" value="dinheiro" onChange={() => handleMetodoPagamentoChange('dinheiro')} />
@@ -124,9 +131,12 @@ function TabelaCarrinho({ produtos, setProdutos, onClose, onFinalizarVenda }) {
           </div>
         )}
       </div>
-      <button onClick={handleFinalizarVenda}>Finalizar Venda</button>
-      <button onClick={handleCancelarVenda}>Cancelar Venda</button>
+      <div className="action-buttons">
+        <button onClick={handleFinalizarVenda}>Finalizar Venda</button>
+        <button onClick={handleCancelarVenda}>Cancelar Venda</button>
+      </div>
       <button onClick={onClose}>Voltar</button>
+
     </section>
   );
 }

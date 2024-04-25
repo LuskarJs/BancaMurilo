@@ -5,10 +5,10 @@ import SearchIcon from "../img/big-search-len.png";
 import filtroIcon from "../img/filtro.png";
 import InterrogacaoIcon from "../img/sinal-de-interrogacao.png";
 import ShowProduto from "../mostraProduto/showProduto";
-import PageVenda from "../venda/venda";
 import { produtos } from "../data/data";
 import caixa from "../img/caixa-registradora.png"
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function HomePage() {
     const [produtoSelecionado, setProdutoSelecionado] = useState(null); 
@@ -52,7 +52,11 @@ function HomePage() {
     
     return (
 
-        <section className="home" >
+        <motion.section 
+        initial={{ x: 50, opacity: 0 }}
+        whileInView={{ x: 0 , opacity: 1}}
+        transition={{ duration: 0.2 }}
+        className="home" >
                 <Link to="/AreaVenda">
             <button className="registradora">
                     <figure>
@@ -68,7 +72,7 @@ function HomePage() {
                 </div>
                 <div>
                     <h3>Entrada: <span>8:55</span></h3>
-                    <h3>Vendas total <span>3</span></h3>
+                    <h3>Vendas total :<span>3</span></h3>
                 </div>
             </div>
 
@@ -88,7 +92,7 @@ function HomePage() {
 
             <section className="EstoqueSection">
                 <div className="title-estoque">
-                    <h3>Estoque de Produtos</h3>
+                    <h3>Ultimos Produtos Adicionados</h3>
                     <figure>
                         <img src={InterrogacaoIcon} alt="sinal de interrogacao para tirar duvidas" />
                     </figure>
@@ -206,7 +210,7 @@ function HomePage() {
                         </div>
                     </div>
                 </div>
-        </section>
+        </motion.section>
         
         
     );

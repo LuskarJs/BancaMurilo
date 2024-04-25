@@ -28,7 +28,11 @@ function HeaderPage() {
                              Estoque
                         </Link>  
                     </li>
-                    <li>Relatorio</li>
+                    <li>
+                        <Link to="/Relatorio">
+                            Relatorio
+                        </Link>
+                    </li>
                     <li>Configuração</li>
                     <li>Historico de Vendas</li>
                     <li>Sair</li>

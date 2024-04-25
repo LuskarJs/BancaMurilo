@@ -1,4 +1,5 @@
 .home {
+    font-family: 'Roboto', sans-serif;
     background-color: var(--bg-color);
     height: 100%;
     padding: 1rem ;
@@ -17,11 +18,11 @@
 .home .Profile-caixa {
     display: flex;
     margin: 1rem 0;
-    border-radius: 5px;
+    border-radius: 4px;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 0 .5rem;
+    padding: 0 .2rem;
     background-color: #7C88A0;
     color: white;
 }
@@ -32,14 +33,15 @@
 
 .home .Profile-caixa h3,
 .home .Profile-caixa h2 {
-    font-size: 1rem;
+    font-size: .9rem;
     margin: 5px;
     text-align: left;
     text-transform: uppercase;
 }
 
-.home .Profile-caixa h2 span {
-    text-transform: lowercase;
+.home .Profile-caixa span {
+   font-family: 'Poppins', sans-serif;
+   font-weight: 400;
 }
 
 .Search-input {
@@ -81,6 +83,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 0;
+    padding-top: 0;
 }
 
 .home .EstoqueSection .title-estoque {
@@ -90,6 +94,7 @@
     justify-content: space-between;
     color: var(--button-color);
     text-transform: uppercase;
+    margin-top: 0;
     font-size: .9rem;
 }
 
@@ -161,12 +166,15 @@
 }
 
 .HistoricoSection table {
-    height: 300px!important;
-    width: 400px!important;
+    width: 100%;
     overflow: scroll;
     border-collapse: collapse;
     background-color: var(--bg-color); 
     border: 1px solid var(--button-login);
+}
+
+th {
+    font-size: .8rem;
 }
 
 th, td {

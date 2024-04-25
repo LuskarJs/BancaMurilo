@@ -1,4 +1,7 @@
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: var(--bg-color);
     width: 100%;
     display: flex;
@@ -6,6 +9,7 @@ header {
     justify-content: center;
     color: var(--button-color);
     height: 50px;
+    z-index: 9999;
     border-bottom: 1px solid rgba(128, 128, 128, 0.596);
 }
 
@@ -16,11 +20,15 @@ header nav {
     align-items: center;
 }
 
+header nav h1 {
+    font-size: .8rem;
+}
+
 header nav .action-icons {
-    width: 60%;
+    width: 75%;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-end;
 }
 
 header nav .action-icons figure {
@@ -49,9 +57,8 @@ header nav ul.show {
     height: 100%;
     width: 100%;
     z-index: 1;
-    top: 60px;
+    top: 50px;
     left: 0;
-    gap: 1rem;
     text-align: left;
     padding-top: 10px;
     padding-left: 15px;
@@ -65,6 +72,7 @@ header nav ul.show li {
     transition: all .35s ease;
     font-size: 2rem;
     text-transform: uppercase;
+    margin: .8rem 0;
 }
 
 header nav ul.show li a {

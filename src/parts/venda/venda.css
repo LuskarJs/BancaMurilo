@@ -68,16 +68,17 @@
 }
 
 .venda-page .lista-categorias {
-    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    gap: 1rem .5rem;
+    overflow: auto;
     list-style: none;
-    gap: 10px;
-    transition: all .35s ease;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid var(--button-color);
-    border-top: 1px solid var(--button-color);
+    justify-content: flex-start;
+    padding-left: 1rem;
+    border: 2px solid var(--button-color);
+    border-radius: 4px;
+    padding: 0rem;
+    margin: 0 1rem;
 }
 
 .venda-page .lista-categorias li {
@@ -119,20 +120,44 @@
     padding: 2rem 0;
 }
 
+.sectionTabela .action-buttons {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sectionTabela .action-buttons button {
+    width: 100%;
+    transition: all .35s ease;
+    padding: 1rem;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.sectionTabela .action-buttons button:nth-child(1) {
+    background-color: #6CEC61;
+}
+
+.sectionTabela .action-buttons button:nth-child(2) {
+    background-color: crimson;
+}
+
 .sectionTabela > button {
+    background-color: var(--bg-color);
+    cursor: pointer;
     width: 90%;
     transition: all .35s ease;
     padding: 1rem;
-    color: var(--button-color);
-}
-
-.sectionTabela > button:Hover {
-    background-color: var(--bg-color);
+    color: white;
     cursor: pointer;
-    transition: all .35s ease;
+    border-radius: 2px;
 }
 
 .tabela-venda {
+    border-radius: 5px 5px 0 0;
+    width: 90%;
     overflow-y: scroll;
     background-color: white;
 }
@@ -154,13 +179,13 @@
     font-size: .8rem;
 }
 
-.tabela-venda tbody td:nth-child(4) {
+.tabela-venda tbody td:nth-child(3) {
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
-.tabela-venda tbody td:nth-child(4) button {
+.tabela-venda tbody td:nth-child(3) button {
     border-radius: 50%;
     padding: 5px 10px;
 }
@@ -186,6 +211,8 @@
     display: flex;
     flex-direction: column;
     background-color: white;
+    font-family: "Roboto";
+    border-radius: 0 0 5px 5px;
     padding: 1rem;
 }
 
@@ -194,6 +221,7 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-left: .7rem;
+    font-size: .9rem;
 }
 
 .metodo-pagamento label {
@@ -207,6 +235,10 @@
     justify-content: space-around;
 }
 
+.metodo-pagamento label {
+    font-size: .8rem;
+}
+
 .metodo-pagamento .troco {
     margin-top: 10px;
 }
@@ -215,6 +247,7 @@
     outline: none;
     padding: 5px;
     border-radius: 5px;
+    border: 1px solid var(--bg-color);
 }
 
 .metodo-pagamento label input {

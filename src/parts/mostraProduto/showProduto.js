@@ -4,6 +4,7 @@ import xIcon from "../img/Close.png";
 import editar from "../img/troca.png";
 import apagar from "../img/botao-apagar.png";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 function ShowProduto({ produto, onClose, onDelete, onEdit }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +46,10 @@ function ShowProduto({ produto, onClose, onDelete, onEdit }) {
     };
 
     return (
-        <section className={`cardSection ${isOpen ? "show" : "hidden"}`}>
+        <motion.section className={`cardSection ${isOpen ? "show" : "hidden"}`}
+            initial={{scale: 0}}
+            whileInView={{scale: 1}}
+        >
             <div className="cardShow">
                 <div className="top-action">
                     <figure>
@@ -97,7 +101,7 @@ function ShowProduto({ produto, onClose, onDelete, onEdit }) {
                     <p>Ver Relatorio Completo</p>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 }
 
