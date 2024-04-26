@@ -1,0 +1,42 @@
+.historico-de-vendasPage {
+    padding: 2rem 1rem;
+    background-color: var(--bg-color);
+    height: 100vh;
+    max-height: 100%;
+}
+
+.historico-de-vendasPage > h1 {
+    background-color: var(--button-color);
+    color: white;
+    padding: .5rem;
+    display: inline-block;
+    border-radius: 5px;
+    margin: 1rem 0;
+}
+
+.filtro {
+    margin: 1rem 0;
+}
+
+.vendas-feitas {
+    overflow: auto;
+    height: 400px;
+    border: 1px solid var(--button-color);
+}
+    
+.filtro select,
+.filtro input {
+    border: 1px solid var(--button-color);
+    border-radius: 4px;
+    padding: .5rem;
+    margin-right: 10px;
+    outline: none;
+}
+
+.filtro button {
+    background-color: var(--button-color);
+    color: white;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}

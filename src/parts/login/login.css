@@ -6,6 +6,7 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    margin-top: 0;
 }
 
 .login form {
@@ -64,7 +65,11 @@
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
-    margin: 1rem 0;
+    margin: .5rem 0;
+}
+
+.login form .content-form .input-label small {
+    opacity: 0;
 }
 
 .login form .content-form .input-label label {
@@ -99,3 +104,4 @@
     background-color: var(--button-color);
     transition: all .35s ease;
 }
+

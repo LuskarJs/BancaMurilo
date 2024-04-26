@@ -1,80 +1,121 @@
-import "./home.css";
-import React, { useState } from "react";
-import HeaderPage from "../header/header";
-import SearchIcon from "../img/big-search-len.png";
-import filtroIcon from "../img/filtro.png";
-import InterrogacaoIcon from "../img/sinal-de-interrogacao.png";
-import ShowProduto from "../mostraProduto/showProduto";
-import { produtos } from "../data/data";
-import caixa from "../img/caixa-registradora.png"
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+    import "./home.css";
+    import React, { useState, useEffect } from "react";
+    import HeaderPage from "../header/header";
+    import SearchIcon from "../img/big-search-len.png";
+    import filtroIcon from "../img/filtro.png";
+    import InterrogacaoIcon from "../img/sinal-de-interrogacao.png";
+    import ShowProduto from "../mostraProduto/showProduto";
+    import { produtos } from "../data/data";
+    import caixa from "../img/caixa-registradora.png"
+    import { Link } from "react-router-dom";
+    import { motion } from "framer-motion";
+    import Cookies from 'js-cookie';
 
-function HomePage() {
-    const [produtoSelecionado, setProdutoSelecionado] = useState(null); 
-    const [termoPesquisa, setTermoPesquisa] = useState("");
-    const [exibirPageVenda, setExibirPageVenda] = useState(false);
-    const [produtosVenda, setProdutosVenda] = useState([]);
+    function HomePage() {
+        const [produtoSelecionado, setProdutoSelecionado] = useState(null); 
+        const [termoPesquisa, setTermoPesquisa] = useState("");
 
-    const handleVerMais = (produto) => {
-        setProdutoSelecionado(produto);
-    };
-
-    const handleCloseProduto = () => {
-        setProdutoSelecionado(null);
-    };
-
-    const handleDeleteProduto = (codigo) => {
-        const novosProdutos = produtos.filter((produto) => produto.codigo !== codigo);
-        console.log("Produto com código", codigo, "excluído.");
-    };
-
-    const handleEditProduto = (produtoEditado) => {
-        const novosProdutos = produtos.map((produto) => {
-            if (produto.codigo === produtoEditado.codigo) {
-                return produtoEditado;
-            }
-            return produto;
+        const [showModal, setShowModal] = useState(false); 
+        const [userData, setUserData] = useState({
+            name: '',
+            email: '',
+            initialCash: '',
+            entryTime: '', 
         });
-        console.log("Produto editado:", produtoEditado);
-    };
 
-    const handlePesquisa = (event) => {
-        setTermoPesquisa(event.target.value);
-    };
+        useEffect(() => {
+            const loggedIn = Cookies.get('loggedIn');
+            const userProfile = Cookies.get('userProfile'); 
+            
+            if (loggedIn || userProfile) {
+                setShowModal(true);
+            } else {
+                setUserData(userProfile);
+            }
+        }, []);
 
-    const produtosFiltrados = produtos.filter(
-        (produto) =>
-            produto?.nome.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
-            produto?.codigo.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
-            produto?.categoria.toLowerCase().includes(termoPesquisa.toLowerCase())
-    );
+        const handleUserDataChange = (e) => {
+            const { name, value } = e.target;
+            setUserData(prevState => ({
+                ...prevState,
+                [name]: value,
+            }));
+        };
+
+        const formatEntryTime = () => {
+            const date = new Date();
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        };
     
-    return (
+        const handleSaveUserData = () => {
+            const formattedEntryTime = formatEntryTime();
+            const userDataWithTime = { ...userData, entryTime: formattedEntryTime };
+            setUserData(userDataWithTime); // Atualiza o estado de entryTime
+            Cookies.set('userProfile', JSON.stringify(userDataWithTime), { expires: 365 });
+            setShowModal(false);
+        };
 
-        <motion.section 
-        initial={{ x: 50, opacity: 0 }}
-        whileInView={{ x: 0 , opacity: 1}}
-        transition={{ duration: 0.2 }}
-        className="home" >
-                <Link to="/AreaVenda">
-            <button className="registradora">
-                    <figure>
-                      <img src={caixa} alt="caixa registradora" />
-                    </figure>
-            </button>
-                </Link>
-            <HeaderPage />
-            <div className="Profile-caixa">
-                <div>
-                    <h2>Caixa: <span>Murilo Luis</span></h2>
-                    <h2>Caixa inicial R$: <span>180</span></h2>
+        const handleVerMais = (produto) => {
+            setProdutoSelecionado(produto);
+        };
+
+        const handleCloseProduto = () => {
+            setProdutoSelecionado(null);
+        };
+
+        const handleDeleteProduto = (codigo) => {
+            const novosProdutos = produtos.filter((produto) => produto.codigo !== codigo);
+            console.log("Produto com código", codigo, "excluído.");
+        };
+
+        const handleEditProduto = (produtoEditado) => {
+            const novosProdutos = produtos.map((produto) => {
+                if (produto.codigo === produtoEditado.codigo) {
+                    return produtoEditado;
+                }
+                return produto;
+            });
+            console.log("Produto editado:", produtoEditado);
+        };
+
+        const handlePesquisa = (event) => {
+            setTermoPesquisa(event.target.value);
+        };
+
+        const produtosFiltrados = produtos.filter(
+            (produto) =>
+                produto?.nome.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
+                produto?.codigo.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
+                produto?.categoria.toLowerCase().includes(termoPesquisa.toLowerCase())
+        );
+        
+        return (
+
+            <motion.section 
+            initial={{ x: 50, opacity: 0 }}
+            whileInView={{ x: 0 , opacity: 1}}
+            transition={{ duration: 0.2 }}
+            className="home" >
+                    <Link to="/AreaVenda">
+                <button className="registradora">
+                        <figure>
+                        <img src={caixa} alt="caixa registradora" />
+                        </figure>
+                </button>
+                    </Link>
+                <HeaderPage />
+                <div className="Profile-caixa">
+                    <div>
+                        <h2>Caixa: <span>{userData.name}</span></h2>
+                        <h2>Caixa inicial R$: <span>{userData.initialCash}</span></h2>
+                    </div>
+                    <div>
+                        <h3>Entrada: <span>{userData.entryTime}</span></h3>
+                        <h3>Vendas total :<span>0</span></h3>
+                    </div>
                 </div>
-                <div>
-                    <h3>Entrada: <span>8:55</span></h3>
-                    <h3>Vendas total :<span>3</span></h3>
-                </div>
-            </div>
 
             <div className="Search-input">
                 <input type="text" placeholder="procure por qualquer produto aqui" onChange={handlePesquisa} />
@@ -115,6 +156,25 @@ function HomePage() {
             </section>
             
             <ShowProduto produto={produtoSelecionado} onClose={handleCloseProduto} onDelete={handleDeleteProduto} onEdit={handleEditProduto} /> 
+
+            {showModal && (
+                <div className="modal">
+                    <h2>Complete seu perfil</h2>
+                    <div className="input-valor">
+                        <label>Nome:</label>
+                        <input type="text" name="name" value={userData.name} onChange={handleUserDataChange} />
+                    </div>
+                    <div className="input-valor">
+                        <label>Email:</label>
+                        <input type="email" name="email" value={userData.email} onChange={handleUserDataChange} />
+                    </div>
+                    <div className="input-valor">
+                        <label>Valor do Caixa Inicial:</label>
+                        <input type="number" name="initialCash" value={userData.initialCash} onChange={handleUserDataChange} />
+                    </div>
+                    <button onClick={handleSaveUserData}>Salvar</button>
+                </div>
+            )}
             
             <section className="HistoricoSection">
                 <div className='title-vendas'>
@@ -177,9 +237,9 @@ function HomePage() {
                 </table>
             </section>
 
-            <div class="resumo-desempenho-vendas">
+            <div className="resumo-desempenho-vendas">
                 <h3>Resumo de Desempenho de Vendas</h3>
-                <div class="dados-vendas">
+                <div className="dados-vendas">
                         <div class="item-venda">
                             <h4>Total de Vendas</h4>
                             <p>100</p>

@@ -7,6 +7,7 @@ import LoginPage from './parts/login/login';
 import PageVenda from './parts/venda/venda';
 import EstoquePage from './parts/estoque/estoque';
 import RelatoriosPage from "./parts/relatorios/relatorioPage";
+import HistoricoDeVendas from "./parts/pedidos/pedidos";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.render(
         <Route path="/AreaVenda" element={<PageVenda />} />
         <Route path="/Estoque" element={<EstoquePage />} /> 
         <Route path="/Relatorio" element={<RelatoriosPage />} /> 
+        <Route path="/HistoricoVendas" element={<HistoricoDeVendas />} /> 
       </Routes>
     </Router>
   </React.StrictMode>,

@@ -273,3 +273,47 @@ th {
     color: green;
     font-size: 1rem;
 }
+
+.home .modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--button-login);
+    border-radius: 5px;
+    z-index: 999;
+}
+
+.modal > button {
+    padding: 1rem;
+    background-color: var(--button-color);
+    color: white;
+    border-radius: 5px;
+    width: 50%;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.modal h2 {
+    margin: 1rem 0;
+}
+
+.modal .input-valor {
+    width: 80%;
+    margin: .5rem;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.modal .input-valor label {
+    margin-bottom: 5px;
+}
+
+.modal .input-valor input {
+    padding: .5rem;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+}

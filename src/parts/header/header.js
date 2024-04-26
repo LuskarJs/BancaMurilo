@@ -34,8 +34,16 @@ function HeaderPage() {
                         </Link>
                     </li>
                     <li>Configuração</li>
-                    <li>Historico de Vendas</li>
-                    <li>Sair</li>
+                    <li>
+                        <Link to="/HistoricoVendas">
+                            Historico de Vendas
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/Login">
+                           Sair
+                        </Link>             
+                    </li>
                 </ul>
                 <div className="action-icons">
                     <figure>

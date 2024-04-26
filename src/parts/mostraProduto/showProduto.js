@@ -49,6 +49,7 @@ function ShowProduto({ produto, onClose, onDelete, onEdit }) {
         <motion.section className={`cardSection ${isOpen ? "show" : "hidden"}`}
             initial={{scale: 0}}
             whileInView={{scale: 1}}
+            transition={{ease: 'easeIn', duration: 0.3}}
         >
             <div className="cardShow">
                 <div className="top-action">
